@@ -9,23 +9,24 @@ public interface BattleshipReceiver {
      * @param random
      * @throws IOException
      */
-    void receiveDice(int random) throws IOException;
+    void receiveDice(int random) throws IOException, StatusException;
 
     /**
      * allowed in PASSIVE state
+     * receives the coordinates for the ships from the sender
      * @param x
      * @param y
      * @throws IOException
      */
-    void receiveSet(int x, int y) throws IOException;
+    void receiveSet(int x, int y) throws IOException, StatusException;
+
 
     /**
-     * notify to give up if wants to quit
+     * allowed in PASSIVE state
+     * confirms the sent coordinates either it was hit, miss or sunk
+     * @param shipState
+     * @throws StatusException
+     * @throws IOException
      */
-    void giveUp();
-
-    /**
-     *
-     */
-    void confirmation(int shipState);
+    void confirmation(int shipState) throws StatusException, IOException;
 }

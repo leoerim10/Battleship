@@ -1,7 +1,8 @@
 package battleship;
 
-public enum GameState {
+public enum GameStatus {
     START,
+    DICE_SENT,
     ACTIVE,
     PASSIVE,
     WON,

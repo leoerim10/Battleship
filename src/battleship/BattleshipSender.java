@@ -9,7 +9,7 @@ public interface BattleshipSender {
      * @param random
      * @throws IOException
      */
-    void sendDice(int random) throws IOException;
+    void sendDice(int random) throws IOException,  StatusException;
 
     /**
      * allowed in ACTIVE state
@@ -18,16 +18,13 @@ public interface BattleshipSender {
      * @param y
      * @throws IOException
      */
-    void sendSet(int x, int y) throws IOException;
+    void sendSet(int x, int y) throws IOException,  StatusException;
 
     /**
-     * notify to give up if wants to quit
+     * allowed in ACTIVE state
+     * informs to giveup the game
+     * @throws StatusException
+     * @throws IOException
      */
-    void giveUp();
-
-    /**
-     *
-     */
-    void confirmation(int shipState);
-
+    void giveUp() throws StatusException, IOException;
 }
