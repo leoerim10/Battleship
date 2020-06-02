@@ -2,7 +2,7 @@ package battleship;
 
 import java.io.IOException;
 
-public interface BattleshipReceiver {
+public interface Receiver {
     /**
      * allowed in START state
      * leads either to active or to passive game state
@@ -28,5 +28,13 @@ public interface BattleshipReceiver {
      * @throws StatusException
      * @throws IOException
      */
-    void confirmation(int shipState) throws StatusException, IOException;
+    void receiverShipStatus(int shipState) throws StatusException, IOException;
+
+    /**
+     *
+     * @throws StatusException
+     * @throws IOException
+     */
+    void receiverGiveUp() throws StatusException, IOException;
+
 }

@@ -3,13 +3,30 @@ package battleship;
 import java.io.IOException;
 import java.util.Random;
 
-public class BattleshipEngine implements BattleshipReceiver, BattleshipSender {
+public class GameEngine implements Receiver, Sender {
     public static int UNDEFINED_DICE = -1;
     private GameStatus status;
     private int sentDice = UNDEFINED_DICE;
+    public final int DIM = 10;
 
-    public BattleshipEngine() {
+
+    GameBoard[][] senderBoard = new GameBoard[DIM][DIM];
+    GameBoard[][] receiverBoard = new GameBoard[DIM][DIM];
+
+    public GameEngine() {
         this.status = GameStatus.START;
+
+        for (int i = 0; i < DIM; i++){
+            for( int j = 0; j < DIM; j++ ){
+                this.senderBoard[i][j] = GameBoard.EMPTY;
+            }
+        }
+
+        for (int i = 0; i < DIM; i++){
+            for( int j = 0; j < DIM; j++ ){
+                this.receiverBoard[i][j] = GameBoard.EMPTY;
+            }
+        }
     }
 
     @Override
@@ -58,18 +75,25 @@ public class BattleshipEngine implements BattleshipReceiver, BattleshipSender {
 
 
     @Override
-    public void giveUp() throws IOException, StatusException {
+    public void senderGiveUp() throws IOException, StatusException {
         if (this.status != GameStatus.ACTIVE) {
+            throw new StatusException();
+        }
+    }
+
+    @Override
+    public void senderShipStatus(int shipState) throws StatusException, IOException {
+    }
+
+    @Override
+    public void receiverShipStatus(int shipState) throws IOException, StatusException {
+        if (this.status != GameStatus.PASSIVE) {
             throw new StatusException();
         }
 
     }
 
     @Override
-    public void confirmation(int shipState) throws IOException, StatusException {
-        if (this.status != GameStatus.PASSIVE) {
-            throw new StatusException();
-        }
-
+    public void receiverGiveUp() throws StatusException, IOException {
     }
 }

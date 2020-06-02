@@ -2,7 +2,7 @@ package battleship;
 
 import java.io.IOException;
 
-public interface BattleshipSender {
+public interface Sender {
     /**
      * allowed in START state.
      * to choose the starter
@@ -26,5 +26,13 @@ public interface BattleshipSender {
      * @throws StatusException
      * @throws IOException
      */
-    void giveUp() throws StatusException, IOException;
+    void senderGiveUp() throws StatusException, IOException;
+
+    /**
+     *
+     * @param shipState
+     * @throws StatusException
+     * @throws IOException
+     */
+    void senderShipStatus(int shipState) throws StatusException, IOException;
 }
