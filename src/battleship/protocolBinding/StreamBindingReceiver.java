@@ -22,15 +22,10 @@ public class StreamBindingReceiver extends Thread {
         this.receiver.receiveDice(random);
     }
 
-    public void readSet() throws IOException, StatusException {
+    public void readSet() throws IOException, StatusException{
         int x = this.dis.readInt();
         int y = this.dis.readInt();
-        try {
-            this.receiver.receiveSet(x, y);
-        } catch (BattleshipException e) {
-            System.err.println("cannot execute set - don't inform sender - error not part of protocol: "
-                    + e.getLocalizedMessage());
-        }
+        this.receiver.receiveSet(x, y);
     }
 
 
