@@ -10,21 +10,21 @@ public class GameEngine implements Receiver, Sender {
     public final int DIM = 10;
 
 
-    GameBoard[][] senderBoard = new GameBoard[DIM][DIM];
-    GameBoard[][] receiverBoard = new GameBoard[DIM][DIM];
+    GameBoardStatus[][] myBoard = new GameBoardStatus[DIM][DIM];
+    GameBoardStatus[][] opponentBoard = new GameBoardStatus[DIM][DIM];
 
     public GameEngine() {
         this.status = GameStatus.START;
 
         for (int i = 0; i < DIM; i++){
             for( int j = 0; j < DIM; j++ ){
-                this.senderBoard[i][j] = GameBoard.EMPTY;
+                this.myBoard[i][j] = GameBoardStatus.EMPTY;
             }
         }
 
         for (int i = 0; i < DIM; i++){
             for( int j = 0; j < DIM; j++ ){
-                this.receiverBoard[i][j] = GameBoard.EMPTY;
+                this.opponentBoard[i][j] = GameBoardStatus.EMPTY;
             }
         }
     }
@@ -52,6 +52,21 @@ public class GameEngine implements Receiver, Sender {
             throw new StatusException();
         }
         // if the received set is the set to sink the final ship then Gamestatus.Lost
+    }
+
+    @Override
+    public void receiverShipStatus(int shipState) throws IOException, StatusException {
+        if (this.status != GameStatus.PASSIVE) {
+            throw new StatusException();
+        }
+
+    }
+
+    @Override
+    public void receiverGiveUp() throws StatusException, IOException {
+        if (this.status != GameStatus.ACTIVE) {
+            throw new StatusException();
+        }
     }
 
     @Override
@@ -83,17 +98,10 @@ public class GameEngine implements Receiver, Sender {
 
     @Override
     public void senderShipStatus(int shipState) throws StatusException, IOException {
-    }
-
-    @Override
-    public void receiverShipStatus(int shipState) throws IOException, StatusException {
         if (this.status != GameStatus.PASSIVE) {
             throw new StatusException();
         }
-
     }
 
-    @Override
-    public void receiverGiveUp() throws StatusException, IOException {
-    }
+
 }

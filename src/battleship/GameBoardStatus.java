@@ -1,5 +1,5 @@
 package battleship;
 
-public enum GameBoard {
+public enum GameBoardStatus {
     CROSS, SHIP, EMPTY;
 }

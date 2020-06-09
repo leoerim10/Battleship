@@ -22,14 +22,14 @@ public interface Sender {
 
     /**
      * allowed in ACTIVE state
-     * informs to giveup the game
+     * informs to give up the game
      * @throws StatusException
      * @throws IOException
      */
     void senderGiveUp() throws StatusException, IOException;
 
     /**
-     *
+     *allowed in PASSIVES state
      * @param shipState
      * @throws StatusException
      * @throws IOException

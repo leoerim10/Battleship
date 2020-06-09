@@ -4,7 +4,7 @@ import java.io.IOException;
 
 public interface Receiver {
     /**
-     * allowed in START state
+     * allowed in DICE_SENT state
      * leads either to active or to passive game state
      * @param random
      * @throws IOException
@@ -31,7 +31,7 @@ public interface Receiver {
     void receiverShipStatus(int shipState) throws StatusException, IOException;
 
     /**
-     *
+     *allowed in ACTIVE state
      * @throws StatusException
      * @throws IOException
      */
