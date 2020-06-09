@@ -29,7 +29,7 @@ public interface Sender {
     void senderGiveUp() throws StatusException, IOException;
 
     /**
-     *allowed in PASSIVES state
+     *allowed in PASSIVE state
      * @param shipState
      * @throws StatusException
      * @throws IOException
