@@ -1,10 +1,12 @@
 package battleship;
 
+import java.io.IOException;
+
 public interface Usage {
     /**
      * figure out who starts the game
      */
-    void throwDice() throws StatusException;
+    void throwDice() throws StatusException, IOException;
 
     /**
      *

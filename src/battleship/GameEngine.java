@@ -117,19 +117,21 @@ public class GameEngine implements Receiver, Usage {
     ///////////////////////////////////////////////////////////////////////////////////////////////
 
     @Override
-    public void throwDice() throws StatusException {
+    public void throwDice() throws StatusException, IOException {
         if (this.status != GameStatus.START) {
             throw new StatusException();
         }
         Random number = new Random();
         this.sentDice = number.nextInt();
-        // sends the number to the receiver
+
+        // sends the number to the receiver via sender
+        this.sender.sendDice(this.sentDice);
         this.status = GameStatus.DICE_SENT;
     }
 
     @Override
     public boolean isActive() {
-        return false;
+        return this.status == GameStatus.ACTIVE;
     }
 
     @Override
